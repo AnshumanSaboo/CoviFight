@@ -1,9 +1,15 @@
 package com.alphamax.covifight.UI.fragment;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -18,17 +24,19 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.TileOverlayOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
-
-import java.util.Objects;
+import com.google.maps.android.heatmaps.HeatmapTileProvider;
 
 
 public class MapFragment extends Fragment {
+
+    private double latitude;
+    private double longitude;
 
     private DocumentSnapshot doc;
 
@@ -38,6 +46,7 @@ public class MapFragment extends Fragment {
     {
         return inflater.inflate(R.layout.fragment_map,container,false);
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
@@ -65,13 +74,47 @@ public class MapFragment extends Fragment {
                                        GeoPoint geoPoint= (GeoPoint) doc.get("location");
                                        assert geoPoint != null;
                                        LatLng loc = new LatLng(geoPoint.getLatitude(), geoPoint.getLongitude());
-                                       mMap.addMarker(new MarkerOptions().position(loc));
+                                       NavigationActivity.heatMapList.add(loc);
+                                       HeatmapTileProvider mProvider = new HeatmapTileProvider.Builder().data(NavigationActivity.heatMapList).build();
+                                       mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
                                    }
                            }
                        }
                    });
                    }
                }
+               //MarkCurrentLocation
+                latitude=15.4648118;
+                longitude=73.8519421;
+                final LocationManager locationManager = (LocationManager) requireActivity().getSystemService(Context.LOCATION_SERVICE);
+                assert locationManager != null;
+                try {
+                    if (ActivityCompat.checkSelfPermission(requireActivity().getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireActivity().getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        //TODO
+                    }
+                    Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                    if(location!=null)
+                    {
+                        latitude=(double)Math.round(location.getLatitude() * 1000d) / 1000d;
+                        longitude=(double)Math.round(location.getLongitude()*1000d)/1000d;
+                    }
+                    else{
+                        location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                        if(location!=null)
+                        {
+                            latitude=(double)Math.round(location.getLatitude() * 1000d) / 1000d;
+                            longitude=(double)Math.round(location.getLongitude()*1000d)/1000d;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+                LatLng curLocation = new LatLng(latitude, longitude);
+                mMap.addMarker(new MarkerOptions().position(curLocation).title(getResources().getString(R.string.mapMarker)));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(curLocation));
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(10.0f));
             }
         });
     }

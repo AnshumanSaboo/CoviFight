@@ -21,66 +21,70 @@
     <string name="lang_error">Please choose at least one choice</string>
 
     <!--Login Activity Strings-->
-    <string name="mob_hi_there">Hi there!</string>
-    <string name="mob_enter_phno">Enter your Phone no.</string>
-    <string name="mob_invalid_phno">Invalid Phone Number</string>
-    <string name="mob_phno_suggestion">Enter Mobile Number</string>
-    <string name="mob_four_digit_code">You will get a 4 digit verification code vía SMS</string>
-    <string name="mob_next">Next</string>
-    <string name="loginSnackbarMobile">Please Enter your mobile Number.</string>
+    <string name="mob_hi_there">¡Hola!</string>
+    <string name="mob_enter_phno">Ingrese su número de teléfono.</string>
+    <string name="mob_invalid_phno">Numero de telefono invalido</string>
+    <string name="mob_phno_suggestion">Ingrese número de móvil</string>
+    <string name="mob_four_digit_code">Recibirá un código de verificación de 4 dígitos vía SMS</string>
+    <string name="mob_next">contiguo</string>
+    <string name="loginSnackbarMobile">Por favor, introduzca su número de móvil.</string>
 
     <!--Verification Activity Strings-->
-    <string name="ver_txtverification">Verification</string>
-    <string name="ver_enter_otp">Enter OTP</string>
-    <string name="ver_no_receiveotp">Didn\'t receive the verification OTP?</string>
-    <string name="resendotp">Resend OTP</string>
-    <string name="ver_submit">Submit</string>
-    <string name="ver_error">Enter Valid Phone Number</string>
-    <string name="verSnackbar">Please Enter all data.</string>
+    <string name="ver_txtverification">Verificación</string>
+    <string name="ver_enter_otp">Ingrese OTP</string>
+    <string name="ver_no_receiveotp">¿No recibió la verificación OTP?</string>
+    <string name="resendotp">Reenviar OTP</string>
+    <string name="resendotpIn">Reenviar OTP en</string>
+    <string name="ver_submit">Enviar</string>
+    <string name="ver_error">Ingrese un número de teléfono válido</string>
+    <string name="verSnackbar">Por favor, introduzca todos los datos</string>
 
     <!--Profile Activity Strings-->
-    <string name="profileTitle">Profile</string>
-    <string name="profileSubtitle">Please enter your details</string>
-    <string name="profileName">Name</string>
-    <string name="profileNameHint">Enter your name</string>
-    <string name="profileEmail">Email</string>
-    <string name="profileEmailHint">Enter your email id</string>
-    <string name="profileDOB">Date of Birth</string>
-    <string name="profileDOBHint">DD/MM/YYYY</string>
-    <string name="profileHomeTown">Hometown</string>
-    <string name="profileHomeTownHint">Enter your hometown</string>
-    <string name="profileSaveButton">Save and Proceed</string>
+    <string name="profileTitle">Perfil</string>
+    <string name="profileSubtitle">Por favor ingrese sus datos</string>
+    <string name="profileName">Nombre</string>
+    <string name="profileNameHint">Introduzca su nombre</string>
+    <string name="profileEmail">Correo electrónico</string>
+    <string name="profileEmailHint">Ingrese su identificación de correo electrónico</string>
+    <string name="profileDOB">Fecha de nacimiento</string>
+    <string name="profileDOBHint">DD/MM/AAAA</string>
+    <string name="profileHomeTown">Pueblo natal</string>
+    <string name="profileHomeTownHint">Ingrese su ciudad natal</string>
+    <string name="profileSaveButton">Guardar y continuar</string>
 
     <!--Navigation Activity Strings-->
-    <string name="navigationHome">Home</string>
-    <string name="navigationMap">Map</string>
-    <string name="navigationContact">Contact</string>
-    <string name="navigationProfile">Profile</string>
-    <string name="navigationSnackbar">Press the back button once again to close the application.</string>
+    <string name="navigationHome">Casa</string>
+    <string name="navigationMap">Mapa</string>
+    <string name="navigationContact">Contacto</string>
+    <string name="navigationProfile">Perfil</string>
+    <string name="navigationSnackbar">Presione el botón Atrás una vez más para cerrar la aplicación.</string>
 
     <!--Home Fragment Strings-->
-    <string name="textHome1">Current status</string>
-    <string name="activityIdleHome">idle</string>
-    <string name="latitudeHintHome">Lat : 0.0</string>
-    <string name="longitudeHintHome">Lon : 0.0</string>
-    <string name="peopleAroundHome">People around you: 0</string>
+    <string name="textHome1">Estado actual</string>
+    <string name="activityIdleHome">desocupado</string>
+    <string name="latitudeHintHome">Lat :</string>
+    <string name="longitudeHintHome">Long :</string>
+    <string name="peopleAroundHome">Personas a tu alrededor: 0</string>
     <string name="probabilityHome">0%</string>
-    <string name="textHome2">Chance of you being infected with CoViD-19</string>
-    <string name="textHome3">Please follow the following instruictions</string>
-    <string name="textHome4">1.Self quarantine yourself and maintain distance from your friends and family</string>
-    <string name="textHome5">2.Gauge the severity of symptoms</string>
-    <string name="textHome6">3.Report to the nearest testing facility to get tested</string>
+    <string name="textHome2">Posibilidad de que se infecte con CoViD-19</string>
+    <string name="textHome3">Por favor siga las siguientes instrucciones</string>
+    <string name="textHome4">1.Póngase en cuarentena y manténgase alejado de sus amigos y familiares</string>
+    <string name="textHome5">2. Medir la severidad de los síntomas</string>
+    <string name="textHome6">3.Reporte a la instalación de prueba más cercana para hacerse la prueba</string>
+
+    <!--Map Fragment Strings-->
+    <string name="mapMarker">Tu posición</string>
 
     <!--Contact Fragment Strings-->
-    <string name="textContact2">You haven\'t been in close proximity with any infected people</string>
-    <string name="textContact1">Nothing yet</string>
+    <string name="textContact2">No has estado muy cerca de ninguna persona infectada</string>
+    <string name="textContact1">Nada aún</string>
 
     <!--Profile Fragment Strings-->
-    <string name="dobProfile">DOB :</string>
-    <string name="emailProfile">Email :</string>
+    <string name="dobProfile">Fecha de nacimiento:</string>
+    <string name="emailProfile">Correo electrónico:</string>
     <string name="emailHintProfile">test@test.com</string>
-    <string name="keyProfile">Access to Govt.</string>
-    <string name="logoutProfile">Logout</string>
+    <string name="keyProfile">Acceso al gobierno</string>
+    <string name="logoutProfile">Cerrar sesión</string>
 
     <string name="test_email">test@test.com</string>
     <string name="test_password">testpassword</string>

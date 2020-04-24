@@ -47,6 +47,7 @@ public class ProfileFragment extends Fragment {
     private ImageView barcode;
     private DocumentSnapshot document;
     private Map<String,Object> users=new HashMap<>();
+    private String docName,docDob,docEmail,docHome;
 
     @Nullable
     @Override
@@ -81,10 +82,14 @@ public class ProfileFragment extends Fragment {
                     assert document != null;
                     if (document.exists()) {
                         Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                        name.setText(""+document.get("Name"));
-                        dob.setText(""+document.get("DateOfBirth"));
-                        email.setText(""+document.get("Email"));
-                        place.setText(""+document.get("Home"));
+                        docName= Objects.requireNonNull(document.get("Name")).toString();
+                        docDob= Objects.requireNonNull(document.get("DateOfBirth")).toString();
+                        docEmail= Objects.requireNonNull(document.get("Email")).toString();
+                        docHome= Objects.requireNonNull(document.get("Home")).toString();
+                        name.setText(docName);
+                        dob.setText(docDob);
+                        email.setText(docEmail);
+                        place.setText(docHome);
                         users.put("Name",document.get("Name"));
                         users.put("Email",document.get("Email"));
                         users.put("DateOfBirth",document.get("DateOfBirth"));

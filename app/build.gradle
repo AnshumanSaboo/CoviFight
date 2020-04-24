@@ -46,6 +46,9 @@ dependencies {
     //Maps
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
+    //HeatMaps
+    implementation 'com.google.maps.android:android-maps-utils:1.0.2'
+
     //Zxing
     implementation 'me.dm7.barcodescanner:zxing:1.9.8'
 

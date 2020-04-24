@@ -108,7 +108,7 @@ public class VerificationActivity extends AppCompatActivity {
                         public void onTick(long millisUntilFinished) {
                             minute = (int)millisUntilFinished/60000;
                             second = (int)(millisUntilFinished/1000)%60;
-                            String temp=getResources().getString(R.string.resendotp)+" in "+String.format("%02d",minute) + ":" + String.format("%02d",second);
+                            String temp=getResources().getString(R.string.resendotpIn)+String.format("%02d",minute) + ":" + String.format("%02d",second);
                             resend.setText(temp);
                         }
 
