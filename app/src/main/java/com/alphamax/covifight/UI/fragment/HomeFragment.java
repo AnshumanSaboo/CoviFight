@@ -28,7 +28,7 @@ public class HomeFragment extends Fragment {
 
     private double latitude;
     private double longitude;
-    public static TextView textLat,textLong;
+    public static TextView textLat,textLong,textActivity;
 
     @Nullable
     @Override
@@ -46,6 +46,7 @@ public class HomeFragment extends Fragment {
         //findViewById
         textLat=view.findViewById(R.id.lattitudeHome);
         textLong=view.findViewById(R.id.longitudeHome);
+        textActivity=view.findViewById(R.id.activityHome);
 
         //Set Location in Home Fragment
         latitude=0.0;

@@ -23,8 +23,12 @@
 
     <!--Foreground Service-->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
     <!--WakeLock Permission-->
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <!--Activity Detection Permission-->
+    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
 
     <application
         android:allowBackup="true"
@@ -59,6 +63,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".UI.activity.StartActivity"
+            android:parentActivityName=".UI.activity.StartActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -67,7 +72,8 @@
             </intent-filter>
         </activity>
         <service
-            android:name=".service.OreoService"
-            />
+            android:name=".service.OreoService" />
+        <service
+            android:name=".service.OreoActivityDetectionService" />
     </application>
 </manifest>

@@ -1,8 +1,11 @@
 package com.alphamax.covifight.UI.fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
@@ -14,8 +17,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.alphamax.covifight.R;
@@ -34,7 +40,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -48,6 +56,7 @@ public class ProfileFragment extends Fragment {
     private DocumentSnapshot document;
     private Map<String,Object> users=new HashMap<>();
     private String docName,docDob,docEmail,docHome;
+    private ImageButton language;
 
     @Nullable
     @Override
@@ -66,6 +75,7 @@ public class ProfileFragment extends Fragment {
         dob=view.findViewById(R.id.dobProfile);
         email=view.findViewById(R.id.emailProfile);
         barcode=view.findViewById(R.id.barcodeProfile);
+        language=view.findViewById(R.id.languageProfile);
 
         db=FirebaseFirestore.getInstance();
 
@@ -134,5 +144,72 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        final String[] languages={getResources().getString(R.string.lang_english),
+                getResources().getString(R.string.lang_dutch),
+                getResources().getString(R.string.lang_french),
+                getResources().getString(R.string.lang_german),
+                getResources().getString(R.string.lang_spanish)};
+
+        language.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext());
+                mBuilder.setTitle("Language");
+                mBuilder.setSingleChoiceItems(languages, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(which==0)
+                        {
+                            String langCode="en";
+                            Locale locale = new Locale(langCode);
+                            Locale.setDefault(locale);
+                            Configuration config = new Configuration();
+                            config.locale = locale;
+                            requireActivity().getBaseContext().getResources().updateConfiguration(config,requireActivity().getBaseContext().getResources().getDisplayMetrics());
+                        }
+                        else if(which==1)
+                        {
+                            String langCode="nl";
+                            Locale locale = new Locale(langCode);
+                            Locale.setDefault(locale);
+                            Configuration config = new Configuration();
+                            config.locale = locale;
+                            requireActivity().getBaseContext().getResources().updateConfiguration(config,requireActivity().getBaseContext().getResources().getDisplayMetrics());
+                        }
+                        else if(which==2)
+                        {
+                            String langCode="fr";
+                            Locale locale = new Locale(langCode);
+                            Locale.setDefault(locale);
+                            Configuration config = new Configuration();
+                            config.locale = locale;
+                            requireActivity().getBaseContext().getResources().updateConfiguration(config,requireActivity().getBaseContext().getResources().getDisplayMetrics());
+                        }
+                        else if(which==3)
+                        {
+                            String langCode="de";
+                            Locale locale = new Locale(langCode);
+                            Locale.setDefault(locale);
+                            Configuration config = new Configuration();
+                            config.locale = locale;
+                            requireActivity().getBaseContext().getResources().updateConfiguration(config,requireActivity().getBaseContext().getResources().getDisplayMetrics());
+                        }
+                        else if(which==4)
+                        {
+                            String langCode="es";
+                            Locale locale = new Locale(langCode);
+                            Locale.setDefault(locale);
+                            Configuration config = new Configuration();
+                            config.locale = locale;
+                            requireActivity().getBaseContext().getResources().updateConfiguration(config,requireActivity().getBaseContext().getResources().getDisplayMetrics());
+                        }
+                        dialog.dismiss();
+                        requireActivity().recreate();
+                    }
+                });
+                AlertDialog mDialog = mBuilder.create();
+                mDialog.show();
+            }
+        });
     }
 }
