@@ -21,6 +21,7 @@
                     android:id="@+id/profilepic"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
+                    android:layout_centerVertical="true"
                     android:src="@mipmap/user"
                     android:layout_marginStart="32dp"
                     android:contentDescription="@string/imageDescription"
@@ -28,22 +29,24 @@
 
                 <TextView
                     android:id="@+id/nameProfile"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/profileName"
                     android:textColor="#15135B"
                     android:textSize="20dp"
                     android:textStyle="bold"
                     android:layout_toEndOf="@id/profilepic"
+                    android:layout_toStartOf="@+id/languageProfile"
                     android:layout_marginStart="16dp"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/profileHomeTown"
                     android:textSize="18dp"
                     android:textColor="#15135B"
-                    android:layout_toRightOf="@id/profilepic"
+                    android:layout_toEndOf="@id/profilepic"
+                    android:layout_toStartOf="@+id/languageProfile"
                     android:layout_below="@id/nameProfile"
                     android:id="@+id/placeProfile"
                     android:layout_marginStart="16dp"
@@ -54,13 +57,14 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginEnd="16dp"
+                    android:layout_marginStart="8dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:tint="#15135B"
                     android:background="@color/colorBG"
                     android:backgroundTint="@color/colorBG"
                     android:contentDescription="@string/imageDescription"
-                    android:src="@android:drawable/ic_btn_speak_now"/>
+                    android:src="@mipmap/ic_language"/>
 
 
             </RelativeLayout>

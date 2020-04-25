@@ -209,7 +209,7 @@ public class OreoService extends Service {
 
                 //Activity Update
                 SharedPreferences prefs = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
-                String activityUpdate=prefs.getString("Activity",getResources().getString(R.string.activityIdleHome));
+                String activityUpdate=prefs.getString("Activity",getResources().getString(R.string.activityUnknown));
                 Data.put("Activity",activityUpdate);
                 try {
                     HomeFragment.textActivity.setText(activityUpdate);

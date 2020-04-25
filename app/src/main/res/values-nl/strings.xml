@@ -86,6 +86,16 @@
     <string name="keyProfile">Access to Govt.</string>
     <string name="logoutProfile">Logout</string>
 
+    <!--Oreo Activity Service-->
+    <string name="activityStill">STILL</string>
+    <string name="activityStanding">STANDING</string>
+    <string name="activityCycling">CYCLING</string>
+    <string name="activityWalking">WALKING</string>
+    <string name="activityRunning">RUNNING</string>
+    <string name="activityTilting">TILTING</string>
+    <string name="activityVehicle">VEHICLE</string>
+    <string name="activityUnknown">UNKNOWN</string>
+
     <string name="test_email">test@test.com</string>
     <string name="test_password">testpassword</string>
 

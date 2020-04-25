@@ -137,6 +137,17 @@ public class NavigationActivity extends AppCompatActivity {
         {
             ActivityCompat.requestPermissions(NavigationActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1003);
         }
+        else {
+            requestActivityPermission();
+        }
+    }
+
+    private void requestActivityPermission()
+    {
+        if (checkSelfPermission(Manifest.permission.ACTIVITY_RECOGNITION) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(NavigationActivity.this,new String[]{Manifest.permission.ACTIVITY_RECOGNITION}, 1004);
+        }
     }
 
     @Override
@@ -166,6 +177,11 @@ public class NavigationActivity extends AppCompatActivity {
             case 1003:if (!(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED))
             {
                 requestStoragePermission();
+            }
+                break;
+            case 1004:if (!(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED))
+            {
+                requestActivityPermission();
             }
                 break;
         }

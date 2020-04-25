@@ -2,6 +2,7 @@ package com.alphamax.covifight.UI.fragment;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -80,6 +81,9 @@ public class HomeFragment extends Fragment {
         textLat.setText(tempLat);
         String tempLong=getResources().getString(R.string.longitudeHintHome)+" "+Double.toString(longitude);
         textLong.setText(tempLong);
+        SharedPreferences prefs = requireActivity().getSharedPreferences(requireActivity().getPackageName(), Context.MODE_PRIVATE);
+        String activityUpdate=prefs.getString("Activity",getResources().getString(R.string.activityUnknown));
+        HomeFragment.textActivity.setText(activityUpdate);
     }
 
 }

@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.location.LocationManager;
 
+import com.alphamax.covifight.R;
 import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -58,21 +59,21 @@ public class OreoActivityDetectionService extends IntentService {
         Resources resources = context.getResources();
         switch(detectedActivityType) {
             case DetectedActivity.ON_BICYCLE:
-                return  "BICYCLE";
+                return  resources.getString(R.string.activityCycling);
             case DetectedActivity.ON_FOOT:
-                return "FOOT";
+                return resources.getString(R.string.activityStanding);
             case DetectedActivity.RUNNING:
-                return "RUNNING";
+                return resources.getString(R.string.activityRunning);
             case DetectedActivity.STILL:
-                return "STILL";
+                return resources.getString(R.string.activityStill);
             case DetectedActivity.TILTING:
-                return "TILTING";
+                return resources.getString(R.string.activityTilting);
             case DetectedActivity.WALKING:
-                return "WALKING";
+                return resources.getString(R.string.activityWalking);
             case DetectedActivity.IN_VEHICLE:
-                return "VEHICLE";
+                return resources.getString(R.string.activityVehicle);
             default:
-                return "UNKNOWN";
+                return resources.getString(R.string.activityUnknown);
         }
     }
 
