@@ -84,6 +84,19 @@ public class HomeFragment extends Fragment {
         SharedPreferences prefs = requireActivity().getSharedPreferences(requireActivity().getPackageName(), Context.MODE_PRIVATE);
         String activityUpdate=prefs.getString("Activity",getResources().getString(R.string.activityUnknown));
         HomeFragment.textActivity.setText(activityUpdate);
+
+        TextView probability=view.findViewById(R.id.probabilityHome);
+        probability.setText(Integer.toString(NavigationActivity.probabilityHome)+"%");
+        if (NavigationActivity.probabilityHome > 75)
+            probability.setTextColor(getResources().getColor(R.color.prob75));
+        else if (NavigationActivity.probabilityHome > 40)
+            probability.setTextColor(getResources().getColor(R.color.prob40));
+        else if (NavigationActivity.probabilityHome > 15)
+            probability.setTextColor(getResources().getColor(R.color.prob15));
+        else if (NavigationActivity.probabilityHome > 5)
+            probability.setTextColor(getResources().getColor(R.color.prob5));
+        else
+            probability.setTextColor(getResources().getColor(R.color.prob0));
     }
 
 }

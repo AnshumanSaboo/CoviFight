@@ -29,8 +29,8 @@
 
     <FrameLayout
         android:id="@+id/frameHome"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
+        android:layout_width="154dp"
+        android:layout_height="154dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginTop="16dp"
@@ -40,8 +40,8 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:layout_marginTop="16dp"
             android:layout_gravity="center_horizontal"
             android:contentDescription="@string/imageDescription"
@@ -52,10 +52,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/activityIdleHome"
-            android:layout_marginTop="72dp"
+            android:layout_marginTop="80dp"
             android:layout_gravity="center_horizontal"
             android:textColor="#15135B"
-            android:textSize="18dp"
+            android:textSize="16dp"
             android:textStyle="bold" />
 
     </FrameLayout>

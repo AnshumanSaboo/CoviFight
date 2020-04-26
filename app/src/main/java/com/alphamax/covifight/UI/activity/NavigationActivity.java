@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +20,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -31,6 +37,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,16 +47,21 @@ public class NavigationActivity extends AppCompatActivity {
     private int backButtonCount = 0;
     public static List<String> listLocations=new ArrayList<>();
     public static List<LatLng> heatMapList=new ArrayList<com.google.android.gms.maps.model.LatLng>();
+    public static Integer probabilityHome;
+    private static final String TAG = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
+
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavController navController = Navigation.findNavController(NavigationActivity.this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
         navigationHeading=findViewById(R.id.navigationHeading);
+        navigationHeading=findViewById(R.id.navigationHeading);
+        probabilityHome=0;
         getHotSpot();
         requestLocationPermission();
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
@@ -57,6 +69,34 @@ public class NavigationActivity extends AppCompatActivity {
             Intent intent=new Intent(NavigationActivity.this, OreoService.class);
             startForegroundService(intent);
         }
+
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        assert user != null;
+        String number = user.getPhoneNumber();
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        assert number != null;
+        DocumentReference docRef = db.collection("Profile").document(number);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    assert document != null;
+                    if (document.exists()) {
+                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                        probabilityHome = Integer.parseInt(Objects.requireNonNull(document.get("Probability")).toString());
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+
     }
 
     public void getHotSpot()
@@ -137,17 +177,6 @@ public class NavigationActivity extends AppCompatActivity {
         {
             ActivityCompat.requestPermissions(NavigationActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1003);
         }
-        else {
-            requestActivityPermission();
-        }
-    }
-
-    private void requestActivityPermission()
-    {
-        if (checkSelfPermission(Manifest.permission.ACTIVITY_RECOGNITION) != PackageManager.PERMISSION_GRANTED)
-        {
-            ActivityCompat.requestPermissions(NavigationActivity.this,new String[]{Manifest.permission.ACTIVITY_RECOGNITION}, 1004);
-        }
     }
 
     @Override
@@ -177,11 +206,6 @@ public class NavigationActivity extends AppCompatActivity {
             case 1003:if (!(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED))
             {
                 requestStoragePermission();
-            }
-                break;
-            case 1004:if (!(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED))
-            {
-                requestActivityPermission();
             }
                 break;
         }

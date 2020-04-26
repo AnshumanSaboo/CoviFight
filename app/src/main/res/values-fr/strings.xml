@@ -21,23 +21,23 @@
     <string name="lang_error">Please choose at least one choice</string>
 
     <!--Login Activity Strings-->
-    <string name="mob_hi_there">Hi there!</string>
-    <string name="mob_enter_phno">Enter your Phone no.</string>
-    <string name="mob_invalid_phno">Invalid Phone Number</string>
-    <string name="mob_phno_suggestion">Enter Mobile Number</string>
-    <string name="mob_four_digit_code">You will get a 4 digit verification code via SMS</string>
-    <string name="mob_next">Next</string>
-    <string name="loginSnackbarMobile">Please Enter your mobile Number.</string>
+    <string name="mob_hi_there">Salut!</string>
+    <string name="mob_enter_phno">Entrez votre numéro de téléphone.</string>
+    <string name="mob_invalid_phno">Numéro de téléphone invalide</string>
+    <string name="mob_phno_suggestion">Entrez le numéro de mobile</string>
+    <string name="mob_four_digit_code">Vous recevrez un code de vérification à 4 chiffres par SMS</string>
+    <string name="mob_next">Prochain</string>
+    <string name="loginSnackbarMobile">Entrez s\'il vous plaît votre numéro de téléphone.</string>
 
     <!--Verification Activity Strings-->
-    <string name="ver_txtverification">Verification</string>
-    <string name="ver_enter_otp">Enter OTP</string>
-    <string name="ver_no_receiveotp">Didn\'t receive the verification OTP?</string>
-    <string name="resendotp">Resend OTP</string>
-    <string name="resendotpIn">Resend OTP in </string>
-    <string name="ver_submit">Submit</string>
-    <string name="ver_error">Enter Valid Phone Number</string>
-    <string name="verSnackbar">Please Enter all data.</string>
+    <string name="ver_txtverification">Vérification</string>
+    <string name="ver_enter_otp">Entrez OTP</string>
+    <string name="ver_no_receiveotp">Vous n\'avez pas reçu la vérification OTP?</string>
+    <string name="resendotp">Renvoyer OTP</string>
+    <string name="resendotpIn">Renvoyer OTP dans </string>
+    <string name="ver_submit">Soumettre</string>
+    <string name="ver_error">Entrez un numéro de téléphone valide</string>
+    <string name="verSnackbar">Veuillez saisir toutes les données.</string>
 
     <!--Profile Activity Strings-->
     <string name="profileTitle">Profile</string>

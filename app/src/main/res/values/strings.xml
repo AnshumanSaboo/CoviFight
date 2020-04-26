@@ -82,7 +82,7 @@
     <string name="dobProfile">DOB :</string>
     <string name="emailProfile">Email :</string>
     <string name="emailHintProfile">test@test.com</string>
-    <string name="keyProfile">Access to Govt.</string>
+    <string name="keyProfile">GRANT PERMISSION</string>
     <string name="logoutProfile">Logout</string>
 
     <!--Oreo Activity Service-->

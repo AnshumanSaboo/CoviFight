@@ -87,14 +87,14 @@
     <string name="logoutProfile">Ausloggen</string>
 
     <!--Oreo Activity Service-->
-    <string name="activityStill">STILL</string>
-    <string name="activityStanding">STANDING</string>
-    <string name="activityCycling">CYCLING</string>
-    <string name="activityWalking">WALKING</string>
-    <string name="activityRunning">RUNNING</string>
-    <string name="activityTilting">TILTING</string>
-    <string name="activityVehicle">VEHICLE</string>
-    <string name="activityUnknown">UNKNOWN</string>
+    <string name="activityStill">IMMER NOCH</string>
+    <string name="activityStanding">STEHEN</string>
+    <string name="activityCycling">RADFAHREN</string>
+    <string name="activityWalking">GEHEN</string>
+    <string name="activityRunning">LAUFEN</string>
+    <string name="activityTilting">Kippen</string>
+    <string name="activityVehicle">VEHICFAHRZEUGE</string>
+    <string name="activityUnknown">UNBEKANNT</string>
 
     <string name="test_email">test@test.com</string>
     <string name="test_password">testpassword</string>

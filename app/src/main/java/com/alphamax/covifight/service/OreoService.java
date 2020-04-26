@@ -233,17 +233,22 @@ public class OreoService extends Service {
                     if(mBTDevices.size()!=0)
                     {
                         List<String> macAddress=new ArrayList<>();
+                        Toast.makeText(getApplicationContext(),mBTDevices.size(),Toast.LENGTH_SHORT).show();
                         for(int i=0;i<mBTDevices.size();i++)
                         {
                             String tempMacAddress=mBTDevices.get(i).getName();
+                            Toast.makeText(getApplicationContext(),tempMacAddress,Toast.LENGTH_SHORT).show();
                             if(tempMacAddress!=null && tempMacAddress.contains("Covid"))
+                            {
                                 macAddress.add(tempMacAddress);
+                            }
                         }
                         if(macAddress.size()!=0)
                         {
                             Data.put("MacAddress",macAddress);
                         }
                     }
+                    assert number != null;
                     firestore.collection("Profile").document(number).collection("TimeStamps").document("" + dateInsecs).set(Data).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -253,6 +258,7 @@ public class OreoService extends Service {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             e.printStackTrace();
+                            Toast.makeText(OreoService.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

@@ -72,7 +72,7 @@ public class ProfileActivity extends AppCompatActivity {
                     String privateKeyBytesBase64 = new String(Base64.encode(privateKeyBytes, Base64.DEFAULT));
                     editor.putString("PrivateKey",privateKeyBytesBase64);
                     editor.putString("UUID", Objects.requireNonNull(document.get("ID")).toString());
-                    editor.putString("Activity",getResources().getString(R.string.activityIdleHome));
+                    editor.putString("Activity",getResources().getString(R.string.activityUnknown));
                     editor.apply();
 
                     Intent intent1=new Intent(ProfileActivity.this,NavigationActivity.class);
