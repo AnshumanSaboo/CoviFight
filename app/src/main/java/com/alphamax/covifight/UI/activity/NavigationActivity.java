@@ -70,33 +70,6 @@ public class NavigationActivity extends AppCompatActivity {
             startForegroundService(intent);
         }
 
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        assert user != null;
-        String number = user.getPhoneNumber();
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        assert number != null;
-        DocumentReference docRef = db.collection("Profile").document(number);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    assert document != null;
-                    if (document.exists()) {
-                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                        probabilityHome = Integer.parseInt(Objects.requireNonNull(document.get("Probability")).toString());
-                    } else {
-                        Log.d(TAG, "No such document");
-                    }
-                } else {
-                    Log.d(TAG, "get failed with ", task.getException());
-                }
-            }
-        });
-
     }
 
     public void getHotSpot()

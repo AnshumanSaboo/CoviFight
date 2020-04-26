@@ -99,34 +99,27 @@
 
     <TextView
         android:id="@+id/probabilityHome"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/probabilityHome"
-        android:textColor="	#008000"
-        android:textSize="32dp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/peopleAroundHome"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:text="@string/textHome2"
-        android:textColor="#15135B"
-        android:textSize="18dp"
+        android:text="Status"
+        android:textAlignment="center"
+        android:textColor="	#008000"
+        android:textSize="20dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:background="@color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/probabilityHome"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/peopleAroundHome" />
 
 
-
-        <TextView
+    <TextView
             android:id="@+id/textHome2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -23,6 +23,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alphamax.covifight.R;
 import com.alphamax.covifight.UI.activity.NavigationActivity;
@@ -76,12 +77,15 @@ public class ProfileFragment extends Fragment {
         email=view.findViewById(R.id.emailProfile);
         barcode=view.findViewById(R.id.barcodeProfile);
         language=view.findViewById(R.id.languageProfile);
+        final Button PrivateKey=view.findViewById(R.id.keyProfile);
 
         db=FirebaseFirestore.getInstance();
+
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;
         final String number=user.getPhoneNumber();
+
 
         DocumentReference docRef = db.collection("Profile").document(number);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -107,6 +111,11 @@ public class ProfileFragment extends Fragment {
                         users.put("Home",document.get("Home"));
                         users.put("Probability",document.get("Probability"));
                         users.put("ID",document.get("ID"));
+                        if(document.get("PrivateKey")!=null)
+                        {
+                            PrivateKey.setClickable(false);
+                            PrivateKey.setBackground(getResources().getDrawable(R.drawable.bg_button_block));
+                        }
                     }
                     else {
                         Log.d(TAG, "No such document");
@@ -123,7 +132,6 @@ public class ProfileFragment extends Fragment {
                 .setMargin(2).getQRCOde();
         barcode.setImageBitmap(bitmap);
 
-        Button PrivateKey=view.findViewById(R.id.keyProfile);
         PrivateKey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,6 +139,8 @@ public class ProfileFragment extends Fragment {
                 String privateKey=prefs.getString("PrivateKey","");
                 users.put("PrivateKey",privateKey);
                 db.collection("Profile").document(number).set(users);
+                PrivateKey.setBackground(getResources().getDrawable(R.drawable.bg_button_block));
+                PrivateKey.setClickable(false);
             }
         });
 
@@ -155,7 +165,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext());
                 mBuilder.setTitle("Language");
-                mBuilder.setSingleChoiceItems(languages, -1, new DialogInterface.OnClickListener() {
+                mBuilder.setSingleChoiceItems(languages, 0, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if(which==0)

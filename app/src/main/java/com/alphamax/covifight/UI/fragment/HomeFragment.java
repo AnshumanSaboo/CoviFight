@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,16 +21,26 @@ import android.widget.TextView;
 
 import com.alphamax.covifight.R;
 import com.alphamax.covifight.UI.activity.NavigationActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.w3c.dom.Text;
 
 import java.util.Objects;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class HomeFragment extends Fragment {
 
     private double latitude;
     private double longitude;
     public static TextView textLat,textLong,textActivity;
+    private double probabilityHome=0;
 
     @Nullable
     @Override
@@ -83,20 +94,63 @@ public class HomeFragment extends Fragment {
         textLong.setText(tempLong);
         SharedPreferences prefs = requireActivity().getSharedPreferences(requireActivity().getPackageName(), Context.MODE_PRIVATE);
         String activityUpdate=prefs.getString("Activity",getResources().getString(R.string.activityUnknown));
-        HomeFragment.textActivity.setText(activityUpdate);
+        textActivity.setText(activityUpdate);
 
-        TextView probability=view.findViewById(R.id.probabilityHome);
-        probability.setText(Integer.toString(NavigationActivity.probabilityHome)+"%");
-        if (NavigationActivity.probabilityHome > 75)
+        final TextView probability=view.findViewById(R.id.probabilityHome);
+
+
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        assert user != null;
+        String number = user.getPhoneNumber();
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        assert number != null;
+        DocumentReference docRef = db.collection("Profile").document(number);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    assert document != null;
+                    if (document.exists()) {
+                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                        probabilityHome = Double.parseDouble(Objects.requireNonNull(document.get("Probability")).toString());
+                        probabilityHome*=100;
+                        if (probabilityHome > 75) {
+                            probability.setText("You may have caught the virus, please get yourself tested!");
+                            probability.setTextColor(getResources().getColor(R.color.prob75));
+                        }
+                        else if (probabilityHome > 25) {
+                            probability.setText("There are chance that you might be infected");
+                            probability.setTextColor(getResources().getColor(R.color.prob15));
+                        }
+                        else
+                        {
+                            probability.setText("Nothing Detected yet,\nyou\'re good to go!");
+                            probability.setTextColor(getResources().getColor(R.color.prob0));
+                        }
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+        if (probabilityHome > 75) {
+            probability.setText("You may have caught the virus, please get yourself tested!");
             probability.setTextColor(getResources().getColor(R.color.prob75));
-        else if (NavigationActivity.probabilityHome > 40)
-            probability.setTextColor(getResources().getColor(R.color.prob40));
-        else if (NavigationActivity.probabilityHome > 15)
+        }
+        else if (probabilityHome > 25) {
+            probability.setText("There are chance that you might be infected");
             probability.setTextColor(getResources().getColor(R.color.prob15));
-        else if (NavigationActivity.probabilityHome > 5)
-            probability.setTextColor(getResources().getColor(R.color.prob5));
+        }
         else
+        {
+            probability.setText("Nothing Detected yet,\nyou\'re good to go!");
             probability.setTextColor(getResources().getColor(R.color.prob0));
+        }
     }
 
 }

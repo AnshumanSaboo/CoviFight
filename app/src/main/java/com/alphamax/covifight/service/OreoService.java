@@ -25,16 +25,13 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 
 import com.alphamax.covifight.R;
 import com.alphamax.covifight.UI.activity.StartActivity;
 import com.alphamax.covifight.UI.fragment.HomeFragment;
-import com.google.android.gms.location.ActivityRecognition;
 import com.google.android.gms.location.ActivityRecognitionClient;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -158,6 +155,24 @@ public class OreoService extends Service {
 
                 //Database Reference
                 FirebaseFirestore firestore= FirebaseFirestore.getInstance();
+                try
+                {
+                    firestore.enableNetwork().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.i(TAG, "onSuccess: FirebaseDatabase");
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
                 Map<String,Object> Data=new HashMap<>();
 
                 //TimeStamp
@@ -234,20 +249,16 @@ public class OreoService extends Service {
                     if(mBTDevices.size()!=0)
                     {
                         List<String> macAddress=new ArrayList<>();
-                        Toast.makeText(getApplicationContext(),mBTDevices.size(),Toast.LENGTH_SHORT).show();
                         for(int i=0;i<mBTDevices.size();i++)
                         {
                             String tempMacAddress=mBTDevices.get(i).getName();
-                            Toast.makeText(getApplicationContext(),tempMacAddress,Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(OreoService.this, tempMacAddress, Toast.LENGTH_SHORT).show();
                             if(tempMacAddress!=null && tempMacAddress.contains("Covid"))
                             {
                                 macAddress.add(tempMacAddress);
                             }
                         }
-                        if(macAddress.size()!=0)
-                        {
-                            Data.put("MacAddress",macAddress);
-                        }
+                        Data.put("MacAddress",macAddress);
                     }
                     assert number != null;
                     firestore.collection("Profile").document(number).collection("TimeStamps").document("" + dateInsecs).set(Data).addOnSuccessListener(new OnSuccessListener<Void>() {
