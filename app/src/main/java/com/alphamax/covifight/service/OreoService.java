@@ -34,8 +34,10 @@ import com.alphamax.covifight.UI.activity.StartActivity;
 import com.alphamax.covifight.UI.fragment.HomeFragment;
 import com.google.android.gms.location.ActivityRecognition;
 import com.google.android.gms.location.ActivityRecognitionClient;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -60,7 +62,6 @@ public class OreoService extends Service {
 
     private static final String TAG = "";
     private ArrayList<BluetoothDevice> mBTDevices = new ArrayList<>();
-    private ActivityRecognitionClient activityRecognitionClient;
     private PowerManager.WakeLock wakeLock;
 
     //Broadcast Receiver
@@ -136,7 +137,7 @@ public class OreoService extends Service {
 
 
         //For Activity Detection
-        activityRecognitionClient =new ActivityRecognitionClient(this);
+        ActivityRecognitionClient activityRecognitionClient = new ActivityRecognitionClient(this);
         Intent activityDetectionIntent = new Intent(this, OreoActivityDetectionService.class);
         activityRecognitionClient.requestActivityUpdates(45000,PendingIntent.getService(this, 0, activityDetectionIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 
@@ -252,7 +253,7 @@ public class OreoService extends Service {
                     firestore.collection("Profile").document(number).collection("TimeStamps").document("" + dateInsecs).set(Data).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-
+                            Log.d(TAG, "onSuccess: DataPushed");
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -275,6 +276,7 @@ public class OreoService extends Service {
                 }
             }
         };
+        Log.d(TAG, "onStartCommand: CountDownTimerStart");
         countDownTimer.start();
         return START_STICKY;
     }
